@@ -43,11 +43,11 @@ const sidebarConfig = [
     path: "/tasks",
     icon: getIcon(clipboardTaskListLtr20Filled),
   },
-  {
-    title: "Holidays",
-    path: "/holidays",
-    icon: getIcon(umbrellaBeach),
-  },
+  // {
+  //   title: "Holidays",
+  //   path: "/holidays",
+  //   icon: getIcon(umbrellaBeach),
+  // },
   {
     title: "Thanks",
     path: "/thanks",
@@ -80,6 +80,10 @@ const sidebarConfig = [
       {
         title: "Import Data",
         path: "/admin/import",
+      },
+      {
+        title: "Register User",
+        path: "/dashboard/register",
       },
     ],
   },

@@ -151,12 +151,13 @@ const AssociateDocuments = ({ userID }) => {
 
   const getAllCategories = async () => {
     const querySnapshot = await getDocs(collection(db, "DocumentCategories"));
-    const all = querySnapshot.docs.map((doc) => doc.data().Name);
+    const all = querySnapshot.docs.map((doc) => doc.data().name);
+    console.log('Docall',all);
     setAllCategories(all);
   };
   const onDeleteFiles = () => {
     selected.forEach((filename) => {
-      setFileList(fileList.filter((file) => file.fileName !== filename));
+      setFileList(fileList.filter((file) => file.FileName !== filename));
       {
         !isDemo && deleteFileFromFirebase(filename);
       }
@@ -191,7 +192,7 @@ const AssociateDocuments = ({ userID }) => {
     if (event.target.files && event.target.files.length > 0) {
       const uploadName = event.target.files[0].name;
       if (fileList.length > 0) {
-        if (fileList.some((e) => e.fileName === uploadName)) {
+        if (fileList.some((e) => e.FileName === uploadName)) {
           setAlert(true);
         } else {
           setPopupOpen(true);

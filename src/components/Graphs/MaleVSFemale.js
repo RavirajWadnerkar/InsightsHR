@@ -36,6 +36,13 @@ export default function MaleVSFemaleGraph() {
   const { associates } = useContext(associatesContext);
   const [allData, setAllData] = useState();
   const [loading, setLoading] = useState(true);
+  const fetchDetails = (gender) => {
+    const filtered = associates.filter(
+      (associate) =>
+        associate.Gender === gender && associate.EmplStatus === "Employed"
+    );
+    return filtered.length;
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -52,16 +59,9 @@ export default function MaleVSFemaleGraph() {
     };
     getGenderCount();
     setLoading(false);
-  }, []);
+  }, [fetchDetails]);
 
-  const fetchDetails = (gender) => {
-    const filtered = associates.filter(
-      (associate) =>
-        associate.Gender === gender && associate.EmplStatus === "Employed"
-    );
-    return filtered.length;
-  };
-
+  
   const chartOptions = merge(BaseOptionChart(), {
     height: 200,
     width: 250,

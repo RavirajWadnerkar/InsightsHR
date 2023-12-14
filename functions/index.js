@@ -1,19 +1,101 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * const {onCall} = require("firebase-functions/v2/https");
- * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
+const functions = require("firebase-functions");
+const admin = require("firebase-admin");
 
-const {onRequest} = require("firebase-functions/v2/https");
-const logger = require("firebase-functions/logger");
-
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
-
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
+admin.initializeApp();
+// // Create and Deploy Your First Cloud Functions
+// // https://firebase.google.com/docs/functions/write-firebase-functions
+//
+// exports.helloWorld = functions.https.onRequest((request, response) => {
+//   functions.logger.info("Hello logs!", {structuredData: true});
 //   response.send("Hello from Firebase!");
 // });
+
+exports.getAllEmployedScheaduled = functions.pubsub
+  // .schedule("0 0 1 */2 *")
+  .schedule("* * * * *")
+  .timeZone(
+    "America/Los_Angeles").onRun((context) => {
+      const associatesRef = admin.firestore().collection("Associates");
+      console.log("associatesRef123", associatesRef);
+      const totalAssociatesRef = admin
+        .firestore()
+        .collection("TotalAssociatesChart");
+      console.log("totalAssociatesRef124325", totalAssociatesRef);
+      let total = 0;
+
+      associatesRef
+        .where("EmplStatus", "==", "Employed")
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            total += 1;
+          });
+        })
+        .finally(() => {
+          totalAssociatesRef.doc().set({
+            Date: admin.firestore.Timestamp.now(),
+            Total: Number(total),
+          });
+        });
+      return null;
+    });
+console.log("hello");
+
+exports.ChangeTitle = functions.database
+  .ref("/Tasks/{user}/MyTasks/{task}/{approvers}/{approver}/status")
+  .onUpdate((change, context) => {
+    if (change.before.exists()) {
+      return null;
+    }
+    // Exit when the data is deleted.
+    if (!change.after.exists()) {
+      return null;
+    }
+
+    const original = change.after.val()
+    functions.logger.log("Uppercasing", context, original);
+    functions.logger.log("Uppercasing", original);
+// const db = admin.database()
+//   const reff = db.ref("Tasks/3bOT8x1SBesW3l9jVQmV/MyTasks/-MrNOML489WlD3Mo7kuy")
+//    return reff.once("value", function(snapshot) {
+//     functions.logger.log(snapshot.val());
+//   });
+  
+
+
+  
+    // const uppercase = original.toUpperCase();
+    // You must return a Promise when performing asynchronous tasks inside a Functions such as
+    // writing to the Firebase Realtime Database.
+    // Setting an "uppercase" sibling in the Realtime Database returns a Promise.
+    //return snapshot.ref.parent.child('uppercase').set(uppercase);
+  });
+// exports.getAllEmployedScheaduled = functions.https.onRequest((request, response) => {
+
+//     const associatesRef = admin.firestore().collection("Associates")
+//     console.log("associatesRef",associatesRef)
+//     const totalAssociatesRef = admin.firestore().collection("TotalAssociatesChart")
+//     console.log("totalAssociatesRef",totalAssociatesRef)
+//     let total = 0
+
+//     associatesRef.where("EmplStatus","==","Employed").get().then(querySnapshot => {
+//         querySnapshot.forEach(doc => {
+//             total +=1
+//         })
+//     }).finally(() => {
+//         totalAssociatesRef.doc().set({
+//         Date: admin.firestore.Timestamp.now(),
+//         Total: Number(total)
+//     })
+//     })
+
+//   });
+// totalAssociatesRef.doc().set({
+//     Date: admin.firestore.Timestamp.now(),
+//     Total: Number("25")
+// })
+// associatesRef.doc().set({
+//     FirstName:"Markkkk"
+// })
+
+// functions.logger.info("total",qq, {structuredData: true});

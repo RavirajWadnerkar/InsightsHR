@@ -106,7 +106,7 @@ export default function OfficeGraph() {
           <CircularProgress />
         </Stack>
       )}
-      {officesData && officesData.length > 1 && (
+      {officesData && officesData.length >= 1 && (
         <ChartWrapperStyle dir="ltr">
           <ReactApexChart
             type="pie"

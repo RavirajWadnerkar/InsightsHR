@@ -4,7 +4,7 @@ import Page from "../components/Page";
 
 const Holidays = () => {
   return (
-    <Page title="ClockIn Chaos - Holidays">
+    <Page title="HR Core - Holidays">
       <div>Coming soon...</div>
     </Page>
   );

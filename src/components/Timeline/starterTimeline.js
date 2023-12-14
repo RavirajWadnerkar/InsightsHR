@@ -32,10 +32,10 @@ export default function StarterTimeline() {
               (associate) => new Date(associate.StartDate.toDate()) > today
             )
             .map((starter) => {
-              const { FirstName, LastName, StartDate, profilePicture } =
+              const { id, FirstName, LastName, StartDate, profilePicture } =
                 starter;
               return (
-                <TimelineItem key={LastName}>
+                <TimelineItem key={id}>
                   <TimelineOppositeContent
                     color="text.secondary"
                     sx={{ m: "auto 0" }}

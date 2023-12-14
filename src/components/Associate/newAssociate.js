@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, React } from "react";
 import {
   associatesContext,
   officesContext,
@@ -30,9 +30,9 @@ import {
   Select,
 } from "@mui/material";
 
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import DatePicker from "@mui/lab/DatePicker";
+import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
+import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
+import {DatePicker} from "@mui/x-date-pickers";
 import Autocomplete from "@mui/material/Autocomplete";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -128,7 +128,7 @@ export default function NewAssociate() {
   ];
 
   return (
-    <Page title="ClockIn Chaos - New Associate">
+    <Page title="HR Core - New Associate">
       <Container>
         <Typography variant="h4" sx={{ pb: 1 }}>
           Add new Associate
@@ -335,7 +335,7 @@ const StepOne = (props) => {
                 as={TextField}
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">£</InputAdornment>
+                    <InputAdornment position="start">$</InputAdornment>
                   ),
                 }}
               />
@@ -456,10 +456,9 @@ const StepOne = (props) => {
                   inputFormat="dd-MM-yyyy"
                   onChange={(StartDate) => {
                     setFieldValue(
-                      "StartDate",
-                      new Date(StartDate)
+                      "StartDate",new Date(StartDate));
                       // Timestamp.fromDate(new Date(StartDate))
-                    );
+                    // );
                   }}
                   renderInput={(params) => (
                     <TextField size="small" {...params} />
@@ -638,7 +637,7 @@ const StepThree = ({ id }) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => history(`/associates/`)}>
+          <Button onClick={() => history(`/dashboard/associates/`)}>
             All Associates
           </Button>
           {!isDemo && (

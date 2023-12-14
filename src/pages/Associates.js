@@ -177,7 +177,7 @@ const Associates = () => {
   //   return toExport;
   // };
   return (
-    <Page title="ClockIn Chaos - Associates">
+    <Page title="HR Core - Associates">
       <Box>
         <Container maxWidth="xl" sx={{ pb: 5 }}>
           <Stack

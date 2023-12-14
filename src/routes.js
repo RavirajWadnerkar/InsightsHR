@@ -18,6 +18,9 @@ import PrivateRoute from "./pages/PrivateRoute";
 
 export default function Router() {
   const { currentUser, isAdmin } = useAuth();
+  
+  //let currentUser=true;
+  //let isAdmin=true;
   let location = useLocation();
   // console.log("location", location);
   return useRoutes([
@@ -44,6 +47,8 @@ export default function Router() {
         },
         { path: "associates/:id", element: <AssociateDetails /> },
         { path: "associates/newassociate", element: <NewAssociate /> },
+        console.log("currentUser",currentUser),
+        console.log("isAdmin",isAdmin),
         { path: "register", element: isAdmin ? <SignUp /> : <Page403 /> },
         { path: "tasks", element: <MyTasks /> },
         {
@@ -67,6 +72,7 @@ export default function Router() {
         <LogoOnlyLayout />
       ) : (
         <Navigate to="/dashboard/home" />
+        //<Navigate to="register" />
       ),
       children: [
         { path: "login", element: <Login /> },

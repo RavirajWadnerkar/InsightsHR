@@ -148,7 +148,7 @@ const MyTasks = () => {
     p: 4,
   };
   return (
-    <Page title="ClockIn Chaos - Tasks">
+    <Page title="HR Core - Tasks">
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -157,9 +157,13 @@ const MyTasks = () => {
           handleClose();
         }}
         closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 200,
+        slots={{
+          backdrop: Backdrop
+        }}
+        slotProps={{
+          backdrop: {
+            timeout: 200,
+          }
         }}
       >
         <Fade in={PopupOpen}>

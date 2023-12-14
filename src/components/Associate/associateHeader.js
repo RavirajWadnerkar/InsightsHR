@@ -363,7 +363,7 @@ const AssociateHeader = ({ handleBack, updateFirebaseAndState }) => {
                                 justifyItems="center"
                                 sx={{ pt: 1 }}
                               >
-                                <Grid item xs={6}>
+                                {/* <Grid item xs={6}>
                                   <Link
                                     target="_blank"
                                     href={`https://teams.microsoft.com/l/chat/0/0?users=${associateData.WorkEmail}`}
@@ -374,7 +374,7 @@ const AssociateHeader = ({ handleBack, updateFirebaseAndState }) => {
                                       height="30"
                                     />
                                   </Link>
-                                </Grid>
+                                </Grid> */}
                                 <Grid item xs={6}>
                                   <Link
                                     href={`mailto:${associateData.WorkEmail}`}

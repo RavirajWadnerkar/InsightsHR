@@ -121,7 +121,7 @@ const AssociateDetails = () => {
         }}
       >
         <associateContext.Provider value={{ associateData, setAssociateData }}>
-          <Page title="ClockIn Chaos - Associate details">
+          <Page title="HR Core - Associate details">
             <Grid
               container
               direction="row"

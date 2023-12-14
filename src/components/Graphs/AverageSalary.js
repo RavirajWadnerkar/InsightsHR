@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import poundOutlined from "@iconify/icons-ant-design/pound-outlined";
+import dollarOutlined from "@iconify/icons-ant-design/dollar-outlined";
 // material
 import { styled } from "@mui/material/styles";
 import { Card, Typography } from "@mui/material";
@@ -60,7 +60,7 @@ export default function AverageSalary() {
   }, [associates]);
   const formatter = new Intl.NumberFormat(undefined, {
     style: "currency",
-    currency: "GBP",
+    currency: "USD",
     maximumSignificantDigits: 3,
   });
   return (
@@ -70,7 +70,7 @@ export default function AverageSalary() {
         {chartData > 0 && (
           <div>
             <IconWrapperStyle>
-              <Icon icon={poundOutlined} width={35} height={35} />
+              <Icon icon={dollarOutlined} width={35} height={35} />
             </IconWrapperStyle>
             <Typography variant="h3">
               {chartData ? formatter.format(chartData) : null}

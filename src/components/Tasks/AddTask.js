@@ -8,7 +8,7 @@ import IncreaseSalary from "./addTaskElements/IncreaseSalary";
 import { addNotification } from "../Thanks/thanksFunctions";
 const AddTask = ({
   userDetails,
-  myManager,
+  myManager, 
   taskType,
   handleCloseAction,
   setPopupOpen,
@@ -16,8 +16,8 @@ const AddTask = ({
   const { associates } = useContext(associatesContext);
 
   const hrPerson = {
-    id: "4U1DWf95rJvgfAwDYs7m",
-    name: "Marco Casper",
+    id: "ymK1a8B5KyTYP9jqvUoV",
+    name: "Aagam Shah",
   };
 
   // const [show, setShow] = useState();

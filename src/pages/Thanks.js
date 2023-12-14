@@ -71,7 +71,7 @@ const Thanks = () => {
 
   return (
     <>
-      <Page title="ClockIn Chaos - Thanks">
+      <Page title="HR Core - Thanks">
         <Box
           sx={{
             px: 1,

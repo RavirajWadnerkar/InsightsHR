@@ -16,6 +16,7 @@ import React, { useState } from "react";
 import Logo from "../components/Logo";
 import Page from "../components/Page";
 import { useNavigate, useLocation } from "react-router-dom";
+import { signInWithGoogle } from "../utils/firebase";
 const Login = () => {
   const [alert, setAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
@@ -27,6 +28,7 @@ const Login = () => {
   let location = useLocation();
   console.log("location", location);
   // let { from } = location.state || { from: { pathname: "/" } };
+  console.log("from", location.state?.from?.pathname);
   let from = location.state?.from?.pathname || "/dashboard/home";
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -48,18 +50,34 @@ const Login = () => {
       .then(() => {
         navigate(from, { replace: true });
       })
-      .catch((error) => (setErrorMessage(error.message), setAlert(true)));
+      .catch((error) => {
+        return (setErrorMessage(error.message), setAlert(true));
+      });
   };
-  const handleDemoLogin = async () => {
-    await login(
-      process.env.REACT_APP_DEMO_LOGIN,
-      process.env.REACT_APP_DEMO_PASSWORD
-    )
-      .then(() => {
-        navigate(from, { replace: true });
-      })
-      .catch((error) => (setErrorMessage(error.message), setAlert(true)));
+  // const handleDemoLogin = async () => {
+  //   await login(
+  //     process.env.REACT_APP_DEMO_LOGIN,
+  //     process.env.REACT_APP_DEMO_PASSWORD
+  //   )
+  //     .then(() => {
+  //       navigate(from, { replace: true });
+  //     })
+  //     .catch((error) => {return (setErrorMessage(error.message), setAlert(true));
+  //     });
+  // };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const user = await signInWithGoogle();
+      // Handle successful sign-in, e.g., navigate to a dashboard or home page
+      navigate(from, { replace: true });
+    } catch (error) {
+      // Handle errors here, e.g., set error message and display an alert
+      setErrorMessage(error.message);
+      setAlert(true);
+    }
   };
+
   const handleReset = async (values) => {
     console.log("reseting password");
     await resetUserPassword(values.Email);
@@ -67,7 +85,7 @@ const Login = () => {
 
   return (
     <div>
-      <Page title="ClockIn Chaos- Login">
+      <Page title="HR Core - Login">
         {isLoginScreen && (
           <Grid
             sx={{ p: 1, pb: 5, pt: 6 }}
@@ -156,7 +174,29 @@ const Login = () => {
                           Login
                         </Button>
 
-                        
+                         {/* <Button
+                          variant="outlined"
+                          fullWidth
+                          onClick={() => handleDemoLogin()}
+                          sx={{
+                            width: "100%",
+                            mb: 2,
+                            color: "white",
+                            backgroundImage: `linear-gradient(to right, #a28ae5, #af7be9, #c168e9, #d54de3, #eb12d8)`,
+                          }}
+                        >
+                          Demo login
+                        </Button>  */}
+                        <div>
+                        <Button
+                          onClick={handleGoogleSignIn}
+                          sx={{ width: "100%", mb: 2 }}
+                          variant="contained"
+                          color="primary"
+                          >
+                        Sign in with Google
+                        </Button>
+                        </div>
 
                         <Button
                           type="button"

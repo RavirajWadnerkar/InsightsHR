@@ -187,7 +187,9 @@ const TaskCard = ({ task, userID, taskPath }) => {
                   <AvatarGroup>
                     {Object.entries(task.approvers).map(([key, value]) => {
                       const { status } = value;
+                      console.log("key", key);
                       const approverDetails = GetAssociateDetails(key);
+                      console.log("approverDetails", approverDetails);
                       const statusColor = (status) => {
                         if (status === "pending") {
                           return "#ffa55a";
@@ -195,7 +197,8 @@ const TaskCard = ({ task, userID, taskPath }) => {
                       };
                       return (
                         <Avatar
-                          key={approverDetails.profilePicture}
+                          key={approverDetails.profilePicture} //change
+                          //alt={approverDetails.FirstName}
                           src={approverDetails.profilePicture}
                           sx={{
                             width: 20,

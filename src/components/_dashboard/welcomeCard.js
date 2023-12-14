@@ -1,9 +1,10 @@
 import { Card, Typography, CardMedia, Grid, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useAuth } from "../../utils/context/AuthContext";
-
+import { useNavigate } from 'react-router-dom';
 export default function WelcomeCard() {
   const { userData } = useAuth();
+  const history = useNavigate();
   const RootStyle = styled(Card)(({ theme }) => ({
     boxShadow: "none",
     // textAlign: "center",
@@ -27,7 +28,7 @@ export default function WelcomeCard() {
                   Welcome {userData.FirstName}!
                 </Typography>
 
-                {/* <Typography variant="h4">ClockIn Chaos!</Typography> */}
+                {/* <Typography variant="h4">HR Core!</Typography> */}
               </Grid>
 
               <Grid item sx={{ pt: 1, pb: 1 }}>
@@ -37,7 +38,7 @@ export default function WelcomeCard() {
               </Grid>
 
               <Grid item sx={{ p: 1 }}>
-                <Button variant="contained">Discover</Button>
+                <Button variant="contained" onClick={() => history('/dashboard/associates')}>Discover</Button>
               </Grid>
             </Grid>
           </Grid>

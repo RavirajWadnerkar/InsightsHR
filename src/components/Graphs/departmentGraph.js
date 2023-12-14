@@ -9,7 +9,7 @@ import { fNumber } from "../../utils/formatNumber.js";
 import BaseOptionChart from "../charts/BaseOptionChart";
 import { useState, useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useContext } from "react";
+import { useContext,React } from "react";
 
 import {
   departmentsContext,
@@ -48,11 +48,14 @@ export default function DepartmentGraph() {
     const getDepartment = () => {
       const CHART_DATA = [];
       for (const dep of allDepartments.flat(2)) {
+        console.log('dep',dep);
         // const ress = await fetchDetails(dep);
         // CHART_DATA1.push(ress.docs.length);
+        console.log('fetchDetails(dep)',fetchDetails(dep));
         CHART_DATA.push(fetchDetails(dep));
       }
       setChartData(CHART_DATA);
+      console.log('CHART_DATA',chartData);
       setLoading(false);
     };
     getDepartment();
@@ -117,7 +120,7 @@ export default function DepartmentGraph() {
           <CircularProgress />
         </Stack>
       )}
-      {chartData && chartData.length > 1 && (
+      {chartData && chartData.length >= 1 && (
         <ChartWrapperStyle dir="ltr">
           <ReactApexChart
             type="pie"

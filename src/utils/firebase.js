@@ -1,8 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider} from "firebase/auth";
 import { getDatabase } from "firebase/database";
-import { getAnalytics } from "firebase/analytics";
 // const {
 //   initializeAppCheck,
 //   ReCaptchaV3Provider,
@@ -15,7 +14,7 @@ const firebaseConfig = {
   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
-  //databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
 };
 // Initialize Firebase
 
@@ -23,7 +22,6 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 const rtdb = getDatabase(app);
-const analytics = getAnalytics(app);
 
 // const appCheck = initializeAppCheck(app, {
 //   // FIREBASE_APPCHECK_DEBUG_TOKEN: true,
@@ -32,5 +30,19 @@ const analytics = getAnalytics(app);
 //   ),
 //   isTokenAutoRefreshEnabled: true,
 // });
+// Google Authentication
+const provider = new GoogleAuthProvider();
+export const signInWithGoogle = async () => {
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    console.log("user",user);
+    return user; // Resolve with the user data
+  } catch (error) {
+    // Log or handle the error here
+    console.error("Error during Google Sign-In: ", error.message);
+    throw new Error(error.message); // Rethrow the error for handling in the component
+  }
+};
 
 export { db, auth, rtdb };

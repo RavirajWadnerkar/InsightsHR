@@ -19,6 +19,8 @@ import { useState, useContext } from "react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { associatesContext } from "../utils/context/contexts";
+import { db } from "../utils/firebase";
+import { collection, addDoc,doc,setDoc } from "firebase/firestore";
 
 const SignUp = () => {
   const { associates } = useContext(associatesContext);
@@ -30,19 +32,39 @@ const SignUp = () => {
     ConfirmPassword: "",
   });
   const [chosenProfile, setChosenProfile] = useState();
-  const uploadToFirebase = async (associateID, role) => {
+
+  const uploadToFirebase = async (associateID, role,userid) => {
     const associate = associates.filter(
-      (ass) => ass.AssociateID === associateID
+      (ass) => ass.id === associateID
     );
-    // const formData = {
-    //   AssociateID: associate.id,
-    //   FirstName: associate.FirstName,
-    //   LastName: associate.LastName,
-    //   Role: role,
-    // };
-    // const docRef = await addDoc(collection(db, "Users"), formData);
-  };
-  // const { signup } = useAuth();
+    console.log("associate",associate)
+    const formData = {
+      AssociateID: associateID,
+      FirstName: associate[0].FirstName,
+      LastName: associate[0].LastName,
+      Role: role,
+     
+    };
+    const userDoc = doc(db, 'Users', userid);
+
+    await setDoc(userDoc, {
+      ...formData,
+      // Add any additional fields you want in the document here
+    });
+    //const docRef = await addDoc(collection(db, "Users"), formData);
+
+    //const usersCollectionRef = doc(db, "Users", docRef.id);
+
+    //const docRef1 = doc(db, 'Associates', associateID); // replace 'associates' with your collection name
+
+    //await setDoc(docRef1, { AssociateID: usersCollectionRef }, { merge: true }); // update the document
+
+    // await setDoc(docRef1, { role }, { merge: true });
+
+    console.log('User added successfully');
+
+};
+  const { signup } = useAuth();
   const handleChange = (prop) => (event) => {
     setNewUser({ ...newUser, [prop]: event.target.value });
   };
@@ -67,12 +89,17 @@ const SignUp = () => {
       ),
     }),
   });
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault()
     console.log("submit");
     console.log(chosenProfile);
-    // await signup(newUser.Email.toString(), newUser.Password.toString());
-    uploadToFirebase(chosenProfile.AssociateID, chosenProfile.Role);
+    let usercredential =await signup(newUser.Email.toString(), newUser.Password.toString());
+    console.log('usercredential',usercredential);
+    console.log('usercredential.user.uid',usercredential.user.uid);
+    console.log('chosenProfile.AssociateID',chosenProfile.AssociateID);
+    uploadToFirebase(chosenProfile.AssociateID, chosenProfile.Role,usercredential.user.uid);
   };
+
   const handleValues = (event) => {
     console.log(event.target.value);
     setChosenProfile({
@@ -87,7 +114,8 @@ const SignUp = () => {
       onSubmit={handleSubmit}
     >
       {() => (
-        <Form>
+        <Form 
+        onSubmit={handleSubmit}>
           <Box sx={{ p: 4, pb: 5, pt: 8 }}>
             <Grid
               // sx={{ p: 4, pb: 5, pt: 8 }}
@@ -145,7 +173,7 @@ const SignUp = () => {
                       <MenuItem key={1} value={"Admin"}>
                         Admin
                       </MenuItem>
-                      <MenuItem key={1} value={"Standard"}>
+                      <MenuItem key={2} value={"Standard"}>
                         Standard
                       </MenuItem>
                     </TextField>

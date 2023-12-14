@@ -11,11 +11,11 @@ import {
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import InputAdornment from "@mui/material/InputAdornment";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import EditIcon from "@mui/icons-material/Edit";
 import Countries from "../../../utils/contries.json";
-import LocalizationProvider from "@mui/lab/LocalizationProvider/";
-import DatePicker from "@mui/lab/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers";
 import {
   associateContext,
   officesContext,
@@ -422,7 +422,7 @@ const AssociateInfo = ({ updateFirebaseAndState }) => {
               onChange={(e) => onUpdate(e)}
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">£</InputAdornment>
+                  <InputAdornment position="start">$</InputAdornment>
                 ),
               }}
             />

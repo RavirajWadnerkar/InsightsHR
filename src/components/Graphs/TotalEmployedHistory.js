@@ -7,6 +7,7 @@ import { BaseOptionChart } from "../../components/charts/";
 import { useState, useEffect } from "react";
 import { collection, query, getDocs, orderBy, limit } from "firebase/firestore";
 import { db } from "../../utils/firebase.js";
+
 // ----------------------------------------------------------------------
 
 const TotalEmployedHistory = () => {
@@ -14,10 +15,34 @@ const TotalEmployedHistory = () => {
 
   useEffect(() => {
     const getTotal = async () => {
+      //storeToTotalAssociate();
       fetchDetails();
     };
     getTotal();
+   // storeToTotalAssociate();
   }, []);
+  //storeToTotalAssociate();
+  // const storeToTotalAssociate = () => {
+  //   const associatesRef = db.collection("Associates");
+  //   const totalAssociatesRef = db.collection("TotalAssociatesChart");
+  
+  //   let total = 0;
+  
+  //   associatesRef
+  //     .where("EmplStatus", "==", "Employed")
+  //     .get()
+  //     .then((querySnapshot) => {
+  //       querySnapshot.forEach((doc) => {
+  //         total += 1;
+  //       });
+  //     })
+  //     .finally(() => {
+  //       totalAssociatesRef.add({
+  //         Date: new Date(),
+  //         Total: Number(total),
+  //       });
+  //     });
+  // }
 
   const fetchDetails = async () => {
     const q = query(
@@ -38,7 +63,9 @@ const TotalEmployedHistory = () => {
     const Min = Math.min(...EmployedHistory.map((o) => o.y));
     const Max = Math.max(...EmployedHistory.map((o) => o.y));
     const percentage = Math.round(Math.abs((Min - Max) / Min) * 100);
+    console.log("percentage", percentage);
     return percentage;
+    
   };
   // if (EmployedHistory) {
   //   GetPercentageChange();

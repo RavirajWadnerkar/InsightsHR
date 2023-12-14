@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
-import { useState, useContext } from "react";
+import { useState, useContext, React } from "react";
 import StyledDropzone from "./ImportCSVDropsozne";
 import { Timestamp } from "firebase/firestore";
 import { collection, addDoc } from "firebase/firestore";
@@ -117,7 +117,7 @@ const ImportAssociates = () => {
 
   return (
     <>
-      <Page title="ClockIn Chaos - Import">
+      <Page title="HR Core - Import">
         <Grid
           container
           direction="column"
@@ -170,7 +170,7 @@ const ImportAssociates = () => {
                     <TableCell align="left">Department</TableCell>
                     <TableCell align="left">Gender</TableCell>
                     <TableCell align="left">Employement Status</TableCell>
-                    <TableCell align="left">Salary&nbsp;(£)</TableCell>
+                    <TableCell align="left">Salary&nbsp;($)</TableCell>
                     <TableCell align="left">Manager</TableCell>
                     <TableCell align="left">Office</TableCell>
                     <TableCell align="left">DOB</TableCell>

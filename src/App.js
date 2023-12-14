@@ -100,15 +100,20 @@ function App() {
 
       if (user != null) {
         setIsDemo(user.email === process.env.REACT_APP_DEMO_LOGIN);
+        console.log("user", user);
+        console.log("user.uid", user.uid);
         const usersCollectionRef = doc(db, "Users", user.uid);
-
+        console.log("usersCollectionRef", usersCollectionRef);
         getDoc(usersCollectionRef).then((result) => {
-          // setUserData(result.data());
+          console.log("result", result.data());
+          setUserData(result.data());
+          console.log("result.data().AssociateID", result.data().AssociateID);
           const associatesCollectionRef = doc(
             db,
             "Associates",
             result.data().AssociateID
           );
+          console.log("associatesCollectionRef", associatesCollectionRef);
           getDoc(associatesCollectionRef).then((res) => {
             setUserData({ ...res.data() });
           });
@@ -121,7 +126,7 @@ function App() {
   useEffect(() => {
     //
 
-    document.title = "ClockIn Chaos";
+    document.title = "HR Core";
     const getAssociates = async () => {
       // const q = query(associatesCollectionRef, orderBy("LastName"));
       // const data = await getDocs(q);
@@ -249,7 +254,7 @@ function App() {
                   >
                     <officesContext.Provider value={{ allOffices, setOffices }}>
                       <departmentsContext.Provider
-                        value={{ allDepartments, setDepartments }}
+                        value={{allDepartments,setDepartments}}
                       >
                         <ThemeConfig>
                           <GlobalStyles />
@@ -265,8 +270,10 @@ function App() {
                               <Route
                                 path="/"
                                 element={
-                                  <PrivateRoute role="Standard">
+                                  // <PrivateRoute role="Admin">
+                                   <PrivateRoute role="Standard"> 
                                     <Navigate to="/dashboard/home" />
+                                    {/* <Navigate to="dashboard/register" /> */}
                                   </PrivateRoute>
                                 }
                               ></Route>
@@ -362,7 +369,7 @@ function App() {
                               <Route
                                 path="thanks/givethanks"
                                 element={
-                                  <PrivateRoute role="Stabdard">
+                                  <PrivateRoute role="Standard">
                                     <GiveThanks />
                                   </PrivateRoute>
                                 }

@@ -103,7 +103,7 @@ const GiveThanks = () => {
     });
   };
   return (
-    <Page title="ClockIn Chaos - Give Thanks">
+    <Page title="HR Core - Give Thanks">
       <Container>
         <Grid
           container
@@ -221,7 +221,7 @@ const GiveThanks = () => {
                         giveThanksData.Comment === "" ||
                         giveThanksData.To === undefined ||
                         giveThanksData.Category === undefined ||
-                        giveThanksData.Comment.length <= 50
+                        giveThanksData.Comment.length <= 10
                       }
                       onClick={() => onSubmit()}
                       onMouseDown={fire}
@@ -231,8 +231,8 @@ const GiveThanks = () => {
                   </Grid>
                   <Grid item>
                     {giveThanksData.Comment &&
-                      giveThanksData.Comment.length >= 25 &&
-                      giveThanksData.Comment.length <= 50 && (
+                      giveThanksData.Comment.length >= 15 &&
+                      giveThanksData.Comment.length <= 30 && (
                         <Typography>Keep typing 😉</Typography>
                       )}
                   </Grid>

@@ -47,17 +47,24 @@ const Home = () => {
     // p: 4,
   };
   return (
-    <Page title="ClockIn Chaos - Dashboard">
+    <Page title="HR Core - Dashboard">
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={isOpen}
         onClose={handleClose}
         closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
+        slots={{
+          backdrop: Backdrop
         }}
+        slotProps={{
+          backdrop: {
+            timeout: 500,
+          }
+        }}
+        // BackdropProps={{
+        //   timeout: 500,
+        // }}
       >
         <Fade in={isOpen}>
           {/* <Box sx={style}> */}
@@ -84,8 +91,8 @@ const Home = () => {
           <Grid item xs={12} sm={5} md={5}>
             <TotalEmployedHistory />
           </Grid>
-
-          {/* <Grid item xs={12} sm={6} md={2}>
+{/* 
+          <Grid item xs={12} sm={6} md={2}>
             <TotalEmployed />
           </Grid> */}
           {/* <Grid item xs={12} md={6} lg={3}></Grid> */}
@@ -95,9 +102,9 @@ const Home = () => {
           <Grid item xs={12} md={6} lg={3}>
             <DepartmentGraph />
           </Grid>
-          {/* <Grid item xs={12} md={6} lg={2}>
+          <Grid item xs={12} md={6} lg={2}>
             <MaleVSFemaleGraph />
-          </Grid> */}
+          </Grid>
 
           <Grid item xs={12} md={6} lg={4}>
             <StarterTimeline />

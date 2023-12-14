@@ -56,3 +56,5 @@ hs_err_pid*
 # Exceptions
 
 cropImage copy.js
+# Local Netlify folder
+.netlify

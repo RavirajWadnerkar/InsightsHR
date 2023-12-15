@@ -126,7 +126,7 @@ function App() {
   useEffect(() => {
     //
 
-    document.title = "HR Core";
+    document.title = "Insights HR";
     const getAssociates = async () => {
       // const q = query(associatesCollectionRef, orderBy("LastName"));
       // const data = await getDocs(q);

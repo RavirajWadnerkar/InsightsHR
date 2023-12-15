@@ -148,7 +148,7 @@ const MyTasks = () => {
     p: 4,
   };
   return (
-    <Page title="HR Core - Tasks">
+    <Page title="Insights HR - Tasks">
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

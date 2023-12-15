@@ -103,7 +103,7 @@ const GiveThanks = () => {
     });
   };
   return (
-    <Page title="HR Core - Give Thanks">
+    <Page title="Insights HR - Give Thanks">
       <Container>
         <Grid
           container

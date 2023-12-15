@@ -85,7 +85,7 @@ const Login = () => {
 
   return (
     <div>
-      <Page title="HR Core - Login">
+      <Page title="Insights HR - Login">
         {isLoginScreen && (
           <Grid
             sx={{ p: 1, pb: 5, pt: 6 }}

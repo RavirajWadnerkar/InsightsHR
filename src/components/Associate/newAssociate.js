@@ -128,7 +128,7 @@ export default function NewAssociate() {
   ];
 
   return (
-    <Page title="HR Core - New Associate">
+    <Page title="Insights HR - New Associate">
       <Container>
         <Typography variant="h4" sx={{ pb: 1 }}>
           Add new Associate

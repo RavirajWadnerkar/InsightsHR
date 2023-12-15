@@ -117,7 +117,7 @@ const ImportAssociates = () => {
 
   return (
     <>
-      <Page title="HR Core - Import">
+      <Page title="Insights HR - Import">
         <Grid
           container
           direction="column"

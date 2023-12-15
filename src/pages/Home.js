@@ -47,7 +47,7 @@ const Home = () => {
     // p: 4,
   };
   return (
-    <Page title="HR Core - Dashboard">
+    <Page title="Insights HR - Dashboard">
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

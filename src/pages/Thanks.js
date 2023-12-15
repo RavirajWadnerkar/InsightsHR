@@ -71,7 +71,7 @@ const Thanks = () => {
 
   return (
     <>
-      <Page title="HR Core - Thanks">
+      <Page title="Insights HR - Thanks">
         <Box
           sx={{
             px: 1,

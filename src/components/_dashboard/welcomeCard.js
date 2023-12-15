@@ -28,7 +28,7 @@ export default function WelcomeCard() {
                   Welcome {userData.FirstName}!
                 </Typography>
 
-                {/* <Typography variant="h4">HR Core!</Typography> */}
+                {/* <Typography variant="h4">Insights HR!</Typography> */}
               </Grid>
 
               <Grid item sx={{ pt: 1, pb: 1 }}>

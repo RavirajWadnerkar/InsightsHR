@@ -177,7 +177,7 @@ const Associates = () => {
   //   return toExport;
   // };
   return (
-    <Page title="HR Core - Associates">
+    <Page title="Insights HR - Associates">
       <Box>
         <Container maxWidth="xl" sx={{ pb: 5 }}>
           <Stack
